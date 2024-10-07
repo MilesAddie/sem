@@ -1,17 +1,22 @@
 package com.napier.sem;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        // Connect to MongoDB on local system - we're using port 27000
-        MongoClient mongoClient = new MongoClient("localhost", 27000);
+
+        String mongoHost = System.getenv("MONGO_HOST");
+        String mongoPort = System.getenv("MONGO_PORT");
+
+        String uri = "mongodb://" + mongoHost + ":" + mongoPort;
+        MongoClient mongoClient = new MongoClient(new MongoClientURI(uri));
+
         // Get a database - will create when we use it
         MongoDatabase database = mongoClient.getDatabase("mydb");
         // Get a collection from the database
