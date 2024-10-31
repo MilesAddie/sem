@@ -61,7 +61,25 @@ public class AppTest
 
     /*
      *
-     *
+     *				For Displaying the employees details
      *
      */
+	
+	@Test
+	void displayEmployeeTestNull()
+	{
+		app.displayEmployee(null);
+	}
+	
+	@Test
+	void displayEmployee()
+	{
+		Employee emp = new Employee();
+		emp.emp_no = 1;
+		emp.first_name = "kevin";
+		emp.last_name = "Chalmers";
+		emp.titles = "Engineer";
+		emp.salary = 55000;
+		app.printDisplayEmployees(emp);
+	}
 }
