@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AppTest
 {
-    static App app;
+    static Main main;
 
     @BeforeAll
     static void init()
     {
-        app = new App();
+        app = new Main();
     }
 
     /*
