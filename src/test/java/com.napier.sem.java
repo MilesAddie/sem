@@ -23,6 +23,7 @@ public class AppTest
      *          For Printing salaries
      *
      */
+    
     @Test
     void printSalariesTestNull()
     {
