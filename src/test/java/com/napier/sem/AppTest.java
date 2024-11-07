@@ -80,6 +80,6 @@ public class AppTest
         emp.last_name = "Chalmers";
         emp.titles = "Engineer";
         emp.salary = 55000;
-        app.printDisplayEmployees(emp);
+        app.displayEmployees(emp);
     }
 }
