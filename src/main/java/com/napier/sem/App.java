@@ -3,6 +3,7 @@ package com.napier.sem;
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class App
 {
     public static void main(String[] args)
@@ -81,7 +82,7 @@ public class App
     {
         try
         {
-            // Load Database driver
+            //Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
