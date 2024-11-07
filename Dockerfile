@@ -1,4 +1,6 @@
 FROM openjdk:latest
-COPY ./target/classes/com /tmp/com
+COPY ./target/seMethods-0.1.0.1.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "com.napier.sem.App"]
+# change last parameter to 10000 if running on github actions
+#if running locally and database aleady started delay can be zero
+ENTRYPOINT ["java", "-jar", "seMethods-0.1.0.1.jar", "world:3306", "0"]

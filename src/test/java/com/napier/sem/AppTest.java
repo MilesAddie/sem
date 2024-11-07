@@ -2,84 +2,38 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-public class AppTest
-{
+public class AppTest {
     static App app;
 
     @BeforeAll
-    static void init()
-    {
+    static void init() {
         app = new App();
     }
 
-    /*
-     *
-     *          For Printing salaries
-     *
-     */
-
     @Test
-    void printSalariesTestNull()
-    {
-        app.printSalaries(null);
+    void printCitiesTestNull() {
+        app.printCityReport(null);
     }
 
     @Test
-    void printSalariesTestEmpty()
-    {
-        ArrayList<Employee> employees = new ArrayList<Employee>();
-        app.printSalaries(employees);
+    void printCitiesTestEmpty() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCityReport(cities);
     }
 
     @Test
-    void printSalariesTestContainsNull()
-    {
-        ArrayList<Employee> employees = new ArrayList<Employee>();
-        employees.add(null);
-        app.printSalaries(employees);
-    }
-
-    @Test
-    void printSalaries()
-    {
-        ArrayList<Employee> employees = new ArrayList<Employee>();
-        Employee emp = new Employee();
-        emp.emp_no = 1;
-        emp.first_name = "Kevin";
-        emp.last_name = "Chalmers";
-        emp.title = "Engineer";
-        emp.salary = 55000;
-        employees.add(emp);
-        app.printSalaries(employees);
-    }
-
-    /*
-     *
-     *				For Displaying the employees details
-     *
-     */
-
-    @Test
-    void displayEmployeeTestNull()
-    {
-        app.displayEmployee(null);
-    }
-
-    @Test
-    void displayEmployee()
-    {
-        Employee emp = new Employee();
-        emp.emp_no = 1;
-        emp.first_name = "kevin";
-        emp.last_name = "Chalmers";
-        emp.titles = "Engineer";
-        emp.salary = 55000;
-        app.displayEmployees(emp);
+    void printCitiesTestNormal() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCityReport(cities);
     }
 }
