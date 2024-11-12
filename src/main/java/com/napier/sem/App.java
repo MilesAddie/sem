@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class App {
 
@@ -23,8 +24,12 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        a.printCityReport(a.getCities());
-        a.report2();
+        //a.printCityReport(a.getCities());
+        //a.printCountryReport(a.getCountries());
+        //a.report2();
+        //a.printCountriesLargestToSmallest(a.getCountries());
+        //a.printCountriesByContinentLargestToSmallest(a.getCountries(),"Europe");
+        a.printCountriesByRegionLargestToSmallest(a.getCountries(), "Caribbean");
 
         // Disconnect from database
         a.disconnect();
@@ -57,6 +62,46 @@ public class App {
             return null;
         }
         return  cities;
+    }
+
+    public ArrayList<Country> getCountries()
+    {
+        ArrayList<Country> countries = new ArrayList<>();
+        try {
+
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String sql = "select * from country";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(sql);
+            //cycle
+            while (rset.next()) {
+                String code = rset.getString("Code");
+                String name = rset.getString("Name");
+                String continent = rset.getString("Continent");
+                String region = rset.getString("Region");
+                float surfaceArea = rset.getFloat("SurfaceArea");
+                int indepYear = rset.getInt("IndepYear");
+                int population = rset.getInt("Population");
+                float lifeExpectancy = rset.getFloat("LifeExpectancy");
+                float gnp = rset.getFloat("GNP");
+                float gnpOld = rset.getFloat("GNPOld");
+                String localName = rset.getString("LocalName");
+                String governmentForm = rset.getString("GovernmentForm");
+                String headOfState = rset.getString("HeadOfState");
+                String capital = rset.getString("Capital");
+                String code2 = rset.getString("Code2");
+                Country country = new Country(code, name, continent, region, surfaceArea, indepYear, population, lifeExpectancy, gnp, gnpOld, localName, governmentForm, headOfState, capital, code2);
+                countries.add(country);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+        return  countries;
     }
 
     public void report2() {
@@ -150,5 +195,61 @@ public class App {
         for(City city : cities){
             System.out.println(city);
         }
+    }
+
+    public void printCountryReport(ArrayList<Country> countries){
+        if(countries == null){
+            System.out.println("No countries found");
+            return;
+        }
+        for(Country country : countries){
+            System.out.println(country);
+        }
+    }
+
+    public void printCountriesLargestToSmallest(ArrayList<Country> countries){
+        if(countries == null){
+            System.out.println("No countries found");
+            return;
+        }
+        for (int i = 0; i < countries.size(); i++){
+            for (int j = i + 1; j < countries.size(); j++){
+                Country temp;
+                if (countries.get(i).getPopulation() < countries.get(j).getPopulation()){
+                    temp = countries.get(i);
+                    countries.set(i, countries.get(j));
+                    countries.set(j, temp);
+                }
+            }
+        }
+        for(Country country : countries){
+            System.out.println(country);
+        }
+    }
+
+    public void printCountriesByContinentLargestToSmallest(ArrayList<Country> countries, String continent){
+        if(countries == null){
+            System.out.println("No countries found");
+            return;
+        }
+        if(continent == null){
+            System.out.println("No continent found");
+            return;
+        }
+        countries.removeIf(country -> !Objects.equals(country.getContinent(), continent));
+        printCountriesLargestToSmallest(countries);
+    }
+
+    public void printCountriesByRegionLargestToSmallest(ArrayList<Country> countries, String region){
+        if(countries == null){
+            System.out.println("No countries found");
+            return;
+        }
+        if(region == null){
+            System.out.println("No region found");
+            return;
+        }
+        countries.removeIf(country -> !Objects.equals(country.getRegion(), region));
+        printCountriesLargestToSmallest(countries);
     }
 }
