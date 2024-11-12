@@ -39,6 +39,8 @@
                     <finalName>sem</finalName>
                     <archive>
                         <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>com.napier.sem.App</mainClass>
                         </manifest>
                     </archive>
