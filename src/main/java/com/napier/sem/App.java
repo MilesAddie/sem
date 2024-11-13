@@ -24,11 +24,6 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-//        for (City city : a.printCapitalCitiesPopulationLargestToSmallest(a.getCities()))
-//        {
-//            System.out.println(city);
-//        }
-
         // Disconnect from database
         a.disconnect();
     }
@@ -497,6 +492,146 @@ public class App {
         catch (Exception e)
         {
             System.out.println("No cities with that region found");
+        }
+        return null;
+    }
+
+    public String printPopulationsContinent(String continent)
+    {
+        if (continent == null)
+        {
+            System.out.println("No continent found");
+            return null;
+        }
+        try
+        {
+            ArrayList<Country> countriesContinent = new ArrayList<>();
+            for (Country country : getCountries())
+            {
+                if (country.getContinent().equals(continent))
+                {
+                    countriesContinent.add(country);
+                }
+            }
+            ArrayList<City> sortedCities = new ArrayList<>();
+            for (City city : getCities())
+            {
+                for (Country country : countriesContinent)
+                {
+                    if (city.getCountryCode().equals(country.getCode()))
+                    {
+                        sortedCities.add(city);
+                    }
+                }
+            }
+            long populationTotal = 0;
+            for (Country country : countriesContinent)
+            {
+                populationTotal += country.getPopulation();
+            }
+            long populationCityTotal = 0;
+            for (City city : sortedCities)
+            {
+                populationCityTotal += city.getPopulation();
+            }
+            return "Population statistics of "+continent+"\nTotal = "+populationTotal+"\nPopulation in cities = "+populationCityTotal+"\nPopulation not in cities = "+(populationTotal-populationCityTotal);
+        }
+        catch (Exception e)
+        {
+            System.out.println("No cities with that continent found");
+        }
+        return null;
+    }
+
+    public String printPopulationsRegion(String region)
+    {
+        if (region == null)
+        {
+            System.out.println("No region found");
+            return null;
+        }
+        try
+        {
+            ArrayList<Country> regionsContinent = new ArrayList<>();
+            App app = new App();
+            for (Country country : getCountries())
+            {
+                if (country.getRegion().equals(region))
+                {
+                    regionsContinent.add(country);
+                }
+            }
+            ArrayList<City> sortedCities = new ArrayList<>();
+            for (City city : getCities()) {
+                for (Country country : regionsContinent) {
+                    if (city.getCountryCode().equals(country.getCode())) {
+                        sortedCities.add(city);
+                    }
+                }
+            }
+            long populationTotal = 0;
+            for (Country country : regionsContinent)
+            {
+                populationTotal += country.getPopulation();
+            }
+            long populationCityTotal = 0;
+            for (City city : sortedCities)
+            {
+                populationCityTotal += city.getPopulation();
+            }
+            return "Population statistics of "+region+"\nTotal = "+populationTotal+"\nPopulation in cities = "+populationCityTotal+"\nPopulation not in cities = "+(populationTotal-populationCityTotal);
+        }
+        catch (Exception e)
+        {
+            System.out.println("No cities with that region found");
+        }
+        return null;
+    }
+
+    public String printPopulationsCountry(String country)
+    {
+        if (country == null)
+        {
+            System.out.println("No Country found");
+            return null;
+        }
+        try
+        {
+            ArrayList<Country> countriesCountry = new ArrayList<>();
+            App app = new App();
+            for (Country country2 : getCountries())
+            {
+                if (country2.getName().equals(country))
+                {
+                    countriesCountry.add(country2);
+                }
+            }
+            ArrayList<City> sortedCities = new ArrayList<>();
+            for (City city : getCities())
+            {
+                for (Country country3 : countriesCountry)
+                {
+                    if (city.getCountryCode().equals(country3.getCode()))
+                    {
+                        sortedCities.add(city);
+                    }
+                }
+            }
+            long populationTotal = 0;
+            for (Country country4 : countriesCountry)
+            {
+                populationTotal += country4.getPopulation();
+            }
+            long populationCityTotal = 0;
+            for (City city : sortedCities)
+            {
+                populationCityTotal += city.getPopulation();
+            }
+            return "Population statistics of "+country+"\nTotal = "+populationTotal+"\nPopulation in cities = "+populationCityTotal+"\nPopulation not in cities = "+(populationTotal-populationCityTotal);
+        }
+        catch (Exception e)
+        {
+            System.out.println("No cities with that country found");
         }
         return null;
     }

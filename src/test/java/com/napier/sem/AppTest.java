@@ -537,4 +537,34 @@ public class AppTest {
         cities.add(city);
         app.printCapitalCitiesPopulationByRegionLargestToSmallest(cities, "Caribbean");
     }
+
+    @Test
+    void printPopulationContinentTestNull(){
+        app.printPopulationsContinent(null);
+    }
+
+    @Test
+    void printPopulationContinentTestNormal(){
+        app.printPopulationsContinent("Europe");
+    }
+
+    @Test
+    void printPopulationRegionTestNull(){
+        app.printPopulationsRegion(null);
+    }
+
+    @Test
+    void printPopulationRegionTestNormal(){
+        app.printPopulationsRegion("Caribbean");
+    }
+
+    @Test
+    void printPopulationCountryTestNull(){
+        app.printPopulationsCountry(null);
+    }
+
+    @Test
+    void printPopulationCountryTestNormal(){
+        app.printPopulationsCountry("United Kingdom");
+    }
 }
