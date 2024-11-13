@@ -24,10 +24,10 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        for (City city : a.printCapitalCitiesPopulationLargestToSmallest(a.getCities()))
-        {
-            System.out.println(city);
-        }
+//        for (City city : a.printCapitalCitiesPopulationLargestToSmallest(a.getCities()))
+//        {
+//            System.out.println(city);
+//        }
 
         // Disconnect from database
         a.disconnect();
