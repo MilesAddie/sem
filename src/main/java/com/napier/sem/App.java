@@ -24,6 +24,11 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
+        for (City city : a.printCitiesPopulationByDistrictLargestToSmallest(a.getCities(),"England"))
+        {
+            System.out.println(city);
+        }
+
         // Disconnect from database
         a.disconnect();
     }
@@ -328,5 +333,60 @@ public class App {
             System.out.println("No cities with that region found");
         }
         return null;
+    }
+
+    public ArrayList<City> printCitiesPopulationByCountryLargestToSmallest(ArrayList<City> cities, String countryName){
+        if(cities == null){
+            System.out.println("No countries found");
+            return null;
+        }
+        if(countryName == null){
+            System.out.println("No country found");
+            return null;
+        }
+
+        ArrayList<Country> countries = getCountries();
+        try
+        {
+            countries.removeIf(country -> !country.getName().equals(countryName));
+            ArrayList<City> sortedCities = new ArrayList<>();
+            for (City city : cities)
+            {
+                for (Country country : countries)
+                {
+                    if (city.getCountryCode().equals(country.getCode()))
+                    {
+                        sortedCities.add(city);
+                    }
+                }
+            }
+            return printCitiesPopulationLargestToSmallest(sortedCities);
+        }
+        catch (Exception e)
+        {
+            System.out.println("No cities with that country found");
+        }
+        return null;
+    }
+
+    public ArrayList<City> printCitiesPopulationByDistrictLargestToSmallest(ArrayList<City> cities, String district){
+        if(cities == null){
+            System.out.println("No countries found");
+            return null;
+        }
+        if(district == null){
+            System.out.println("No district found");
+            return null;
+        }
+
+        ArrayList<City> sortedCities = new ArrayList<>();
+        for (City city : cities)
+        {
+            if (city.getDistrict().equals(district))
+            {
+                sortedCities.add(city);
+            }
+        }
+        return printCitiesPopulationLargestToSmallest(sortedCities);
     }
 }

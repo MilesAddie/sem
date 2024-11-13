@@ -330,4 +330,96 @@ public class AppTest {
         cities.add(city);
         app.printCitiesPopulationByRegionLargestToSmallest(cities, "Caribbean");
     }
+
+    @Test
+    void printCitiesPopulationByCountryHighestToLowestTestNullNoCountry() {
+        app.printCitiesPopulationByCountryLargestToSmallest(null, null);
+    }
+
+    @Test
+    void printCitiesPopulationByCountryHighestToLowestTestNullWithCountry() {
+        app.printCitiesPopulationByCountryLargestToSmallest(null, "United Kingdom");
+    }
+
+    @Test
+    void printCitiesPopulationByCountryHighestToLowestTestEmptyNoCountry() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCitiesPopulationByCountryLargestToSmallest(cities, null);
+    }
+
+    @Test
+    void printCitiesPopulationByCountryHighestToLowestTestEmptyWithCountry() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCitiesPopulationByCountryLargestToSmallest(cities, "United Kingdom");
+    }
+
+    @Test
+    void printCitiesPopulationByCountryHighestToLowestTestNormalNoCountry() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCitiesPopulationByCountryLargestToSmallest(cities, null);
+    }
+
+    @Test
+    void printCitiesPopulationByCountryHighestToLowestTestNormalWithCountry() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCitiesPopulationByCountryLargestToSmallest(cities, "United Kingdom");
+    }
+
+    @Test
+    void printCitiesPopulationByDistrictHighestToLowestTestNullNoDistrict() {
+        app.printCitiesPopulationByDistrictLargestToSmallest(null, null);
+    }
+
+    @Test
+    void printCitiesPopulationByDistrictHighestToLowestTestNullWithDistrict() {
+        app.printCitiesPopulationByDistrictLargestToSmallest(null, "England");
+    }
+
+    @Test
+    void printCitiesPopulationByDistrictHighestToLowestTestEmptyNoDistrict() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCitiesPopulationByDistrictLargestToSmallest(cities, null);
+    }
+
+    @Test
+    void printCitiesPopulationByDistrictHighestToLowestTestEmptyWithDistrict() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCitiesPopulationByDistrictLargestToSmallest(cities, "England");
+    }
+
+    @Test
+    void printCitiesPopulationByDistrictHighestToLowestTestNormalNoDistrict() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCitiesPopulationByDistrictLargestToSmallest(cities, null);
+    }
+
+    @Test
+    void printCitiesPopulationByDistrictHighestToLowestTestNormalWithDistrict() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCitiesPopulationByDistrictLargestToSmallest(cities, "England");
+    }
 }

@@ -147,4 +147,26 @@ public class AppIntegrationTest
         assertEquals(city.getDistrict(), "–");
         assertEquals(city.getPopulation(), 961);
     }
+
+    @Test
+    void testGetCitiesPopulationByCountryHighestToLowest()
+    {
+        City city = app.printCitiesPopulationByCountryLargestToSmallest(app.getCities(), "United Kingdom").get(56);
+        assertEquals(city.getId(), 513);
+        assertEquals(city.getName(), "Gloucester");
+        assertEquals(city.getCountryCode(), "GBR");
+        assertEquals(city.getDistrict(), "England");
+        assertEquals(city.getPopulation(), 107000);
+    }
+
+    @Test
+    void testGetCitiesPopulationByDistrictHighestToLowest()
+    {
+        City city = app.printCitiesPopulationByDistrictLargestToSmallest(app.getCities(), "England").get(30);
+        assertEquals(city.getId(), 494);
+        assertEquals(city.getName(), "Reading");
+        assertEquals(city.getCountryCode(), "GBR");
+        assertEquals(city.getDistrict(), "England");
+        assertEquals(city.getPopulation(), 148000);
+    }
 }
