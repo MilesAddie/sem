@@ -202,4 +202,34 @@ public class AppIntegrationTest
         assertEquals(city.getDistrict(), "St. Andrew");
         assertEquals(city.getPopulation(), 103962);
     }
+
+    @Test
+    void testPopulationContinent()
+    {
+        String populationStatistics = app.printPopulationsContinent("Europe");
+        assertEquals(populationStatistics, "Population statistics of Europe\n" +
+                "Total = 730074600\n" +
+                "Population in cities = 241942813\n" +
+                "Population not in cities = 488131787");
+    }
+
+    @Test
+    void testPopulationRegion()
+    {
+        String populationStatistics = app.printPopulationsRegion("Caribbean");
+        assertEquals(populationStatistics, "Population statistics of Caribbean\n" +
+                "Total = 38140000\n" +
+                "Population in cities = 11067550\n" +
+                "Population not in cities = 27072450");
+    }
+
+    @Test
+    void testPopulationCountry()
+    {
+        String populationStatistics = app.printPopulationsCountry("United Kingdom");
+        assertEquals(populationStatistics, "Population statistics of United Kingdom\n" +
+                "Total = 59623400\n" +
+                "Population in cities = 22436673\n" +
+                "Population not in cities = 37186727");
+    }
 }
