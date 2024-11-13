@@ -422,4 +422,119 @@ public class AppTest {
         cities.add(city);
         app.printCitiesPopulationByDistrictLargestToSmallest(cities, "England");
     }
+
+    @Test
+    void printCapitalCitiesPopulationHighestToLowestTestNull() {
+        app.printCapitalCitiesPopulationLargestToSmallest(null);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationHighestToLowestTestEmpty() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCapitalCitiesPopulationLargestToSmallest(cities);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationHighestToLowestTestNormal() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCapitalCitiesPopulationLargestToSmallest(cities);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByContinentHighestToLowestTestNullNoContinent() {
+        app.printCapitalCitiesPopulationByContinentLargestToSmallest(null, null);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByContinentHighestToLowestTestNullWithContinent() {
+        app.printCapitalCitiesPopulationByContinentLargestToSmallest(null, "Europe");
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByContinentHighestToLowestTestEmptyNoContinent() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCapitalCitiesPopulationByContinentLargestToSmallest(cities, null);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByContinentHighestToLowestTestEmptyWithContinent() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCapitalCitiesPopulationByContinentLargestToSmallest(cities, "Europe");
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByContinentHighestToLowestTestNormalNoContinent() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCapitalCitiesPopulationByContinentLargestToSmallest(cities, null);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByContinentHighestToLowestTestNormalWithContinent() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCapitalCitiesPopulationByContinentLargestToSmallest(cities, "Europe");
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByRegionHighestToLowestTestNullNoRegion() {
+        app.printCapitalCitiesPopulationByRegionLargestToSmallest(null, null);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByRegionHighestToLowestTestNullWithRegion() {
+        app.printCapitalCitiesPopulationByRegionLargestToSmallest(null, "Caribean");
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByRegionHighestToLowestTestEmptyNoRegion() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCapitalCitiesPopulationByRegionLargestToSmallest(cities, null);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByRegionHighestToLowestTestEmptyWithRegion() {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCapitalCitiesPopulationByRegionLargestToSmallest(cities, "Caribbean");
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByRegionHighestToLowestTestNormalNoRegion() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCapitalCitiesPopulationByRegionLargestToSmallest(cities, null);
+    }
+
+    @Test
+    void printCapitalCitiesPopulationByRegionHighestToLowestTestNormalWithRegion() {
+        ArrayList<City> cities = new ArrayList<>();
+        City city = new City(458, "Glasgow", "GBR", "Scotland", 619680);
+        cities.add(city);
+        city = new City(459, "Liverpool", "GBR", "England", 461000);
+        cities.add(city);
+        city = new City(460, "Edinburgh", "GBR", "Scotland", 450180);
+        cities.add(city);
+        app.printCapitalCitiesPopulationByRegionLargestToSmallest(cities, "Caribbean");
+    }
 }

@@ -169,4 +169,37 @@ public class AppIntegrationTest
         assertEquals(city.getDistrict(), "England");
         assertEquals(city.getPopulation(), 148000);
     }
+
+    @Test
+    void testGetCapitalCitiesPopulationHighestToLowest()
+    {
+        City city = app.printCapitalCitiesPopulationLargestToSmallest(app.getCities()).get(30);
+        assertEquals(city.getId(), 35);
+        assertEquals(city.getName(), "Alger");
+        assertEquals(city.getCountryCode(), "DZA");
+        assertEquals(city.getDistrict(), "Alger");
+        assertEquals(city.getPopulation(), 2168000);
+    }
+
+    @Test
+    void testGetCapitalCitiesPopulationByContinentHighestToLowest()
+    {
+        City city = app.printCapitalCitiesPopulationByContinentLargestToSmallest(app.getCities(), "Europe").get(30);
+        assertEquals(city.getId(), 201);
+        assertEquals(city.getName(), "Sarajevo");
+        assertEquals(city.getCountryCode(), "BIH");
+        assertEquals(city.getDistrict(), "Federaatio");
+        assertEquals(city.getPopulation(), 360000);
+    }
+
+    @Test
+    void testGetCapitalCitiesPopulationByRegionHighestToLowest()
+    {
+        City city = app.printCapitalCitiesPopulationByRegionLargestToSmallest(app.getCities(), "Caribbean").get(5);
+        assertEquals(city.getId(), 1530);
+        assertEquals(city.getName(), "Kingston");
+        assertEquals(city.getCountryCode(), "JAM");
+        assertEquals(city.getDistrict(), "St. Andrew");
+        assertEquals(city.getPopulation(), 103962);
+    }
 }

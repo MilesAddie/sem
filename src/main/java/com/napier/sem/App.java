@@ -24,10 +24,10 @@ public class App {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
-//        for (City city : a.printCitiesPopulationByDistrictLargestToSmallest(a.getCities(),"England"))
-//        {
-//            System.out.println(city);
-//        }
+        for (City city : a.printCapitalCitiesPopulationLargestToSmallest(a.getCities()))
+        {
+            System.out.println(city);
+        }
 
         // Disconnect from database
         a.disconnect();
@@ -251,7 +251,7 @@ public class App {
 
     public ArrayList<City> printCitiesPopulationLargestToSmallest(ArrayList<City> cities){
         if(cities == null){
-            System.out.println("No countries found");
+            System.out.println("No cities found");
             return null;
         }
         for (int i = 0; i < cities.size(); i++) {
@@ -269,7 +269,7 @@ public class App {
 
     public ArrayList<City> printCitiesPopulationByContinentLargestToSmallest(ArrayList<City> cities, String continent){
         if (cities == null){
-            System.out.println("No countries found");
+            System.out.println("No cities found");
             return null;
         }
         if (continent == null) {
@@ -303,7 +303,7 @@ public class App {
 
     public ArrayList<City> printCitiesPopulationByRegionLargestToSmallest(ArrayList<City> cities, String region){
         if(cities == null){
-            System.out.println("No countries found");
+            System.out.println("No cities found");
             return null;
         }
         if(region == null){
@@ -337,7 +337,7 @@ public class App {
 
     public ArrayList<City> printCitiesPopulationByCountryLargestToSmallest(ArrayList<City> cities, String countryName){
         if(cities == null){
-            System.out.println("No countries found");
+            System.out.println("No cities found");
             return null;
         }
         if(countryName == null){
@@ -371,7 +371,7 @@ public class App {
 
     public ArrayList<City> printCitiesPopulationByDistrictLargestToSmallest(ArrayList<City> cities, String district){
         if(cities == null){
-            System.out.println("No countries found");
+            System.out.println("No cities found");
             return null;
         }
         if(district == null){
@@ -388,5 +388,116 @@ public class App {
             }
         }
         return printCitiesPopulationLargestToSmallest(sortedCities);
+    }
+
+    public ArrayList<City> sortCapitalCitiesPopulationLargestToSmallest(ArrayList<City> cities){
+        if(cities == null){
+            System.out.println("No cities found");
+            return null;
+        }
+        for (int i = 0; i < cities.size(); i++) {
+            for (int j = i + 1; j < cities.size(); j++) {
+                City temp;
+                if (cities.get(i).getPopulation() < cities.get(j).getPopulation()) {
+                    temp = cities.get(i);
+                    cities.set(i, cities.get(j));
+                    cities.set(j, temp);
+                }
+            }
+        }
+        return cities;
+    }
+
+    public ArrayList<City> printCapitalCitiesPopulationLargestToSmallest(ArrayList<City> cities) {
+        if(cities == null){
+            System.out.println("No cities found");
+            return null;
+        }
+        ArrayList<City> sortedCities = new ArrayList<>();
+        try
+        {
+            for (Country country : getCountries())
+            {
+                for (City city : cities)
+                {
+                    if (Long.toString(city.getId()).equals(country.getCapital()))
+                    {
+                        sortedCities.add(city);
+                    }
+                }
+            }
+            return sortCapitalCitiesPopulationLargestToSmallest(sortedCities);
+        }
+        catch (Exception e)
+        {
+            System.out.println("No countries with those capitals found");
+        }
+        return null;
+    }
+
+    public ArrayList<City> printCapitalCitiesPopulationByContinentLargestToSmallest(ArrayList<City> cities, String continent) {
+        if(cities == null){
+            System.out.println("No cities found");
+            return null;
+        }
+        if(continent == null){
+            System.out.println("No continent found");
+            return null;
+        }
+        ArrayList<Country> countries = getCountries();
+        try
+        {
+            countries.removeIf(country -> !country.getContinent().equals(continent));
+            ArrayList<City> sortedCities = new ArrayList<>();
+            for (Country country : countries)
+            {
+                for (City city : cities)
+                {
+                    if (Long.toString(city.getId()).equals(country.getCapital()))
+                    {
+                        sortedCities.add(city);
+                    }
+                }
+            }
+            return sortCapitalCitiesPopulationLargestToSmallest(sortedCities);
+        }
+        catch (Exception e)
+        {
+            System.out.println("No cities with that continent found");
+        }
+        return null;
+    }
+
+    public ArrayList<City> printCapitalCitiesPopulationByRegionLargestToSmallest(ArrayList<City> cities, String region) {
+        if(cities == null){
+            System.out.println("No cities found");
+            return null;
+        }
+        if(region == null){
+            System.out.println("No region found");
+            return null;
+        }
+        ArrayList<Country> countries = getCountries();
+        try
+        {
+            countries.removeIf(country -> !country.getRegion().equals(region));
+            ArrayList<City> sortedCities = new ArrayList<>();
+            for (Country country : countries)
+            {
+                for (City city : cities)
+                {
+                    if (Long.toString(city.getId()).equals(country.getCapital()))
+                    {
+                        sortedCities.add(city);
+                    }
+                }
+            }
+            return sortCapitalCitiesPopulationLargestToSmallest(sortedCities);
+        }
+        catch (Exception e)
+        {
+            System.out.println("No cities with that region found");
+        }
+        return null;
     }
 }
