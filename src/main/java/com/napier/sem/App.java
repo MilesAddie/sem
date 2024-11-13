@@ -29,7 +29,9 @@ public class App {
         //a.report2();
         //a.printCountriesLargestToSmallest(a.getCountries());
         //a.printCountriesByContinentLargestToSmallest(a.getCountries(),"Europe");
-        a.printCountriesByRegionLargestToSmallest(a.getCountries(), "Caribbean");
+        //a.printCountriesByRegionLargestToSmallest(a.getCountries(), "Caribbean");
+        //a.printCitiesLargestToSmallest(a.getCities());
+        a.printCitiesByContinentLargestToSmallest(a.getCities(),"Europe");
 
         // Disconnect from database
         a.disconnect();
@@ -251,5 +253,76 @@ public class App {
         }
         countries.removeIf(country -> !Objects.equals(country.getRegion(), region));
         printCountriesLargestToSmallest(countries);
+    }
+
+    public void printCitiesLargestToSmallest(ArrayList<City> cities){
+        if(cities == null){
+            System.out.println("No countries found");
+            return;
+        }
+        for (int i = 0; i < cities.size(); i++){
+            for (int j = i + 1; j < cities.size(); j++){
+                City temp;
+                if (cities.get(i).getPopulation() < cities.get(j).getPopulation()){
+                    temp = cities.get(i);
+                    cities.set(i, cities.get(j));
+                    cities.set(j, temp);
+                }
+            }
+        }
+        for(City city : cities){
+            System.out.println(city);
+        }
+    }
+
+    public void printCitiesByContinentLargestToSmallest(ArrayList<City> cities, String continent){
+        if(cities == null){
+            System.out.println("No countries found");
+            return;
+        }
+        if(continent == null){
+            System.out.println("No continent found");
+            return;
+        }
+        /*
+        FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE
+        FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE FIX HERE
+         */
+        for (int i = 0; i < cities.size(); i++){
+            for (int j = 0; j < getCountries().size(); j++){
+                if (getCountries().get(j).getCode().equals(cities.get(i).getCountryCode())) {
+                    if (getCountries().get(j).getCode().equals(cities.get(i).getCountryCode())) {
+                        break;
+                    }
+                    else{
+                        cities.remove(i);
+                        break;
+                    }
+                }
+                else{
+                    cities.remove(i);
+                }
+            }
+        }
+        printCitiesLargestToSmallest(cities);
+    }
+
+    public void printCitiesByRegionLargestToSmallest(ArrayList<City> cities, String region){
+        if(cities == null){
+            System.out.println("No countries found");
+            return;
+        }
+        if(region == null){
+            System.out.println("No region found");
+            return;
+        }
+        for (int i = 0; i < cities.size(); i++){
+            for (int j = 0; j < getCountries().size(); j++){
+                if (!getCountries().get(j).getRegion().equals(cities.get(i).getCountryCode()) || !getCountries().get(j).getRegion().equals(region)) {
+                    cities.remove(i);
+                }
+            }
+        }
+        printCitiesLargestToSmallest(cities);
     }
 }
