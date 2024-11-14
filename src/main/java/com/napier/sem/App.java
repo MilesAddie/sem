@@ -23,11 +23,7 @@ public class App {
         } else {
             a.connect(args[0], Integer.parseInt(args[1]));
         }
-//        ArrayList<City> cities = a.printCapitalCitiesPopulationLargestToSmallestWithN(a.getCities(), 5);
-//        for (City city : cities)
-//        {
-//            System.out.println(city);
-//        }
+
         // Disconnect from database
         a.disconnect();
     }
@@ -44,11 +40,11 @@ public class App {
             ResultSet rset = stmt.executeQuery(sql);
             //cycle
             while (rset.next()) {
-                int id = rset.getInt("ID");
+                Integer id = rset.getInt("ID");
                 String name = rset.getString("Name");
                 String countryCode = rset.getString("CountryCode");
                 String district = rset.getString("District");
-                int population = rset.getInt("Population");
+                Integer population = rset.getInt("Population");
                 City city = new City(id, name, countryCode, district, population);
                 cities.add(city);
             }
@@ -113,7 +109,7 @@ public class App {
             //cycle
             while (rset.next()) {
                 String name = rset.getString("name");
-                int population = rset.getInt("population");
+                Integer population = rset.getInt("population");
                 sb.append(name + "\t" + population + "\r\n");
             }
             new File("./output/").mkdir();
@@ -184,7 +180,6 @@ public class App {
         }
     }
 
-    //Print a list of the cities and their details
     public void printCityReport(ArrayList<City> cities){
         if(cities == null){
             System.out.println("No cities found");
@@ -195,7 +190,6 @@ public class App {
         }
     }
 
-    //print a list of the countries and their details
     public void printCountryReport(ArrayList<Country> countries){
         if(countries == null){
             System.out.println("No countries found");
@@ -206,17 +200,6 @@ public class App {
         }
     }
 
-    public void printCapitalCityReport(ArrayList<City> capitalCities){
-        if(capitalCities == null){
-            System.out.println("No capital cities found");
-            return;
-        }
-        for(City city : capitalCities){
-            System.out.println(city);
-        }
-    }
-
-    //print out the countries from the largest population to the smallest
     public ArrayList<Country> printCountriesPopulationLargestToSmallest(ArrayList<Country> countries){
         if(countries == null){
             System.out.println("No countries found");
@@ -235,28 +218,6 @@ public class App {
         return countries;
     }
 
-    //print out the top N populated countries
-    public ArrayList<Country> printCountriesPopulationLargestToSmallestWithN(ArrayList<Country> countries, int n){
-        if(countries == null){
-            System.out.println("No countries found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No countries found");
-            return null;
-        }
-        countries = printCountriesPopulationLargestToSmallest(countries);
-        ArrayList<Country> sortedCountries = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && countries.size() != i)
-        {
-            sortedCountries.add(countries.get(i));
-            i++;n--;
-        }
-        return sortedCountries;
-    }
-
-    //print out the countries in a specific continent in order of largest population to the smallest
     public ArrayList<Country> printCountriesPopulationByContinentLargestToSmallest(ArrayList<Country> countries, String continent){
         if(countries == null){
             System.out.println("No countries found");
@@ -270,32 +231,6 @@ public class App {
          return printCountriesPopulationLargestToSmallest(countries);
     }
 
-    //print out the top N populated countries in a specific continent
-    public ArrayList<Country> printCountriesPopulationByContinentLargestToSmallestWithN(ArrayList<Country> countries, String continent, int n){
-        if(countries == null){
-            System.out.println("No countries found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No countries found");
-            return null;
-        }
-        if(continent == null){
-            System.out.println("No continent found");
-            return null;
-        }
-        countries = printCountriesPopulationByContinentLargestToSmallest(countries, continent);
-        ArrayList<Country> sortedCountries = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && countries.size() != i)
-        {
-            sortedCountries.add(countries.get(i));
-            i++;n--;
-        }
-        return sortedCountries;
-    }
-
-    //print out the countries in a specific region in order of largest population to the smallest
     public ArrayList<Country> printCountriesPopulationByRegionLargestToSmallest(ArrayList<Country> countries, String region){
         if(countries == null){
             System.out.println("No countries found");
@@ -309,32 +244,6 @@ public class App {
         return printCountriesPopulationLargestToSmallest(countries);
     }
 
-    //print out the top N populated countries in a specific region
-    public ArrayList<Country> printCountriesPopulationByRegionLargestToSmallestWithN(ArrayList<Country> countries, String region, int n){
-        if(countries == null){
-            System.out.println("No countries found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No countries found");
-            return null;
-        }
-        if(region == null){
-            System.out.println("No region found");
-            return null;
-        }
-        countries = printCountriesPopulationByRegionLargestToSmallest(countries, region);
-        ArrayList<Country> sortedCountries = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && countries.size() != 0)
-        {
-            sortedCountries.add(countries.get(i));
-            i++;n--;
-        }
-        return sortedCountries;
-    }
-
-    //print out the cities in order of largest population to smallest
     public ArrayList<City> printCitiesPopulationLargestToSmallest(ArrayList<City> cities){
         if(cities == null){
             System.out.println("No cities found");
@@ -353,29 +262,6 @@ public class App {
         return cities;
     }
 
-    //print out the top N populated cities
-    public ArrayList<City> printCitiesPopulationLargestToSmallestWithN(ArrayList<City> cities, int n){
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No cities found");
-            return null;
-        }
-
-        cities = printCitiesPopulationLargestToSmallest(cities);
-        ArrayList<City> sortedCities = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && cities.size() != i)
-        {
-            sortedCities.add(cities.get(i));
-            i++;n--;
-        }
-        return sortedCities;
-    }
-
-    //print out the cities in a specific continent in order of largest population to the smallest
     public ArrayList<City> printCitiesPopulationByContinentLargestToSmallest(ArrayList<City> cities, String continent){
         if (cities == null){
             System.out.println("No cities found");
@@ -410,36 +296,6 @@ public class App {
         return null;
     }
 
-    //print out the top N populated cities from specific continent
-    public ArrayList<City> printCitiesPopulationByContinentLargestToSmallestWithN(ArrayList<City> cities, String continent, int n){
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(continent == null) {
-            System.out.println("No continent found");
-            return null;
-        }
-        cities = printCitiesPopulationByContinentLargestToSmallest(cities, continent);
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        ArrayList<City> sortedCities = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && cities.size() != i)
-        {
-            sortedCities.add(cities.get(i));
-            i++;n--;
-        }
-        return sortedCities;
-    }
-
-    //print out the cities in a specific region in order of largest population to the smallest
     public ArrayList<City> printCitiesPopulationByRegionLargestToSmallest(ArrayList<City> cities, String region){
         if(cities == null){
             System.out.println("No cities found");
@@ -474,32 +330,6 @@ public class App {
         return null;
     }
 
-    //print out the top N populated cities from specific region
-    public ArrayList<City> printCitiesPopulationByRegionLargestToSmallestWithN(ArrayList<City> cities, String region, int n){
-        cities = printCitiesPopulationByRegionLargestToSmallest(cities, region);
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(region == null) {
-            System.out.println("No region found");
-            return null;
-        }
-        ArrayList<City> sortedCities = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && cities.size() != i)
-        {
-            sortedCities.add(cities.get(i));
-            i++;n--;
-        }
-        return sortedCities;
-    }
-
-    //print out the cities in a specific country in order of largest population to the smallest
     public ArrayList<City> printCitiesPopulationByCountryLargestToSmallest(ArrayList<City> cities, String countryName){
         if(cities == null){
             System.out.println("No cities found");
@@ -534,32 +364,6 @@ public class App {
         return null;
     }
 
-    //print out the top N populated cities from specific country
-    public ArrayList<City> printCitiesPopulationByCountryLargestToSmallestWithN(ArrayList<City> cities, String country, int n){
-        cities = printCitiesPopulationByCountryLargestToSmallest(cities, country);
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(country == null) {
-            System.out.println("No country found");
-            return null;
-        }
-        ArrayList<City> sortedCities = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && cities.size() != i)
-        {
-            sortedCities.add(cities.get(i));
-            i++;n--;
-        }
-        return sortedCities;
-    }
-
-    //print out the cities in a specific district in order of largest population to the smallest
     public ArrayList<City> printCitiesPopulationByDistrictLargestToSmallest(ArrayList<City> cities, String district){
         if(cities == null){
             System.out.println("No cities found");
@@ -581,33 +385,6 @@ public class App {
         return printCitiesPopulationLargestToSmallest(sortedCities);
     }
 
-    //print out the top N populated cities from specific district
-    public ArrayList<City> printCitiesPopulationByDistrictLargestToSmallestWithN(ArrayList<City> cities, String district, int n){
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(district == null) {
-            System.out.println("No district found");
-            return null;
-        }
-
-        cities = printCitiesPopulationByDistrictLargestToSmallest(cities, district);
-        ArrayList<City> sortedCities = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && cities.size() != i)
-        {
-            sortedCities.add(cities.get(i));
-            i++;n--;
-        }
-        return sortedCities;
-    }
-
-    //sort the capital cities in order of largest population to the smallest
     public ArrayList<City> sortCapitalCitiesPopulationLargestToSmallest(ArrayList<City> cities){
         if(cities == null){
             System.out.println("No cities found");
@@ -626,7 +403,6 @@ public class App {
         return cities;
     }
 
-    //print out the capital cities in order of largest population to the smallest
     public ArrayList<City> printCapitalCitiesPopulationLargestToSmallest(ArrayList<City> cities) {
         if(cities == null){
             System.out.println("No cities found");
@@ -654,30 +430,6 @@ public class App {
         return null;
     }
 
-    //print out the top N populated capital cities
-    public ArrayList<City> printCapitalCitiesPopulationLargestToSmallestWithN(ArrayList<City> cities, int n){
-        cities = printCapitalCitiesPopulationLargestToSmallest(cities);
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(n <= 0 && cities.size() != 0){
-            System.out.println("No cities found");
-            return null;
-        }
-        ArrayList<City> sortedCities = new ArrayList<>();
-        int i = 0;
-        while (n >= 0 && cities.size() != i)
-        {
-            System.out.println("i = "+i+"\nn = "+n);
-            sortedCities.add(cities.get(i));
-            i++;
-            n--;
-        }
-        return sortedCities;
-    }
-
-    //print out the capital cities in a specific continent in order of largest population to the smallest
     public ArrayList<City> printCapitalCitiesPopulationByContinentLargestToSmallest(ArrayList<City> cities, String continent) {
         if(cities == null){
             System.out.println("No cities found");
@@ -711,32 +463,6 @@ public class App {
         return null;
     }
 
-    //print out the top N populated capital cities from a specific continent
-    public ArrayList<City> printCapitalCitiesPopulationByContinentLargestToSmallestWithN(ArrayList<City> cities, String continent, int n){
-        cities = printCapitalCitiesPopulationByContinentLargestToSmallest(cities, continent);
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(continent == null){
-            System.out.println("No continent found");
-            return null;
-        }
-        ArrayList<City> sortedCities = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && cities.size() != i)
-        {
-            sortedCities.add(cities.get(i));
-            i++;n--;
-        }
-        return sortedCities;
-    }
-
-    //print out the capital cities in a specific region in order of largest population to the smallest
     public ArrayList<City> printCapitalCitiesPopulationByRegionLargestToSmallest(ArrayList<City> cities, String region) {
         if(cities == null){
             System.out.println("No cities found");
@@ -770,32 +496,6 @@ public class App {
         return null;
     }
 
-    //print out the top N populated capital cities from a specific region
-    public ArrayList<City> printCapitalCitiesPopulationByRegionLargestToSmallestWithN(ArrayList<City> cities, String region, int n){
-        cities = printCapitalCitiesPopulationByRegionLargestToSmallest(cities, region);
-        if(cities == null){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(n <= 0){
-            System.out.println("No cities found");
-            return null;
-        }
-        if(region == null){
-            System.out.println("No region found");
-            return null;
-        }
-        ArrayList<City> sortedCities = new ArrayList<>();
-        int i = 0;
-        while (n != 0 && cities.size() != i)
-        {
-            sortedCities.add(cities.get(i));
-            i++;n--;
-        }
-        return sortedCities;
-    }
-
-    //print out the population of a continent along with the population of people who do / don't live in cities
     public String printPopulationsContinent(String continent)
     {
         if (continent == null)
@@ -843,7 +543,6 @@ public class App {
         return null;
     }
 
-    //print out the population of a region along with the population of people who do / don't live in cities
     public String printPopulationsRegion(String region)
     {
         if (region == null)
@@ -889,7 +588,6 @@ public class App {
         return null;
     }
 
-    //print out the population of a country along with the population of people who do / don't live in cities
     public String printPopulationsCountry(String country)
     {
         if (country == null)
