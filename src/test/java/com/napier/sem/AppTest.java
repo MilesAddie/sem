@@ -589,7 +589,8 @@ public class AppTest {
     @Test
     void printPopulationCountryTestNormal(){
         app.printPopulationsCountry("United Kingdom");
-
+    }
+    
     @Test
     void printCountriesPopulationHighestToLowestTestNullWithNAsNegative() {
         app.printCountriesPopulationLargestToSmallestWithN(null, -5);
